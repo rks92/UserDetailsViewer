@@ -1,5 +1,20 @@
 <html>
 	<head>
+		<script>
+			$(document).ready(function(){
+				loadUserDisplayList()
+			});
+
+			function loadUserDisplayList(){
+				$.getJSON( "/user_display_list.jsp", function (data){
+					updateUserDisplayListUI(data)
+				});
+			}
+
+			function updateUserDisplayListUI(data){
+				console.log(data);
+			}
+		</script>
 	</head>
 	<body>
 		Test
