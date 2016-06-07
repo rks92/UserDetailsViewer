@@ -11,13 +11,58 @@
 				});
 			}
 
-			function updateUserDisplayListUI(data){
-				console.log(data);
+			function updateUserDisplayListUI(users){
+				$.each(users, function(index, user){
+					$("#userListTable").append(generateUserListRowHTML(user));
+				});
 			}
+
+			function generateUserListRowHTML(user){
+					var userRowHtml = "";
+					var actionButtons =  '<%= image_tag("bar_chart_icon.png", :class => "actionIcons") %>'
+									  +	 '<%= image_tag("cancel_icon.png", :class => "actionIcons") %>'
+									  +  '<%= image_tag("lock_icon.png", :class => "actionIcons") %>';	
+
+					userRowHtml += "<tr>"
+								+ 	"<td>" + user.firstName + "</td>"
+								+	"<td>" + user.lastName + "</td>"
+								+	"<td>" + user.location.name + "</td>"
+								+	"<td>" + actionButtons + "</td>"
+								+  "</tr>";
+
+					return userRowHtml;
+				}
+
+				$("#userListTable tr").on("hover", function(){
+					alert("here");
+				});
+
+
 		</script>
+
+		<style>
+			.actionIcons{
+				width: 20px;
+				height: 20px;
+				margin-left: 20px;
+				visibility: hidden;
+			}
+
+			table#userListTable tr:hover img{
+				visibility: visible;
+			}
+		</style>
 	</head>
 	<body>
-		<table class="table table-hover">
-		</table>
+		<div class="col-md-9">
+			<table class="table table-hover" id="userListTable">
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Place</th>
+					<th>&nbsp;</th>
+				</tr>
+			</table>
+		</div>
 	</body>
 </html>
