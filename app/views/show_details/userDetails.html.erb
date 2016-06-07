@@ -18,25 +18,27 @@
 			}
 
 			function generateUserListRowHTML(user){
-					var userRowHtml = "";
-					var actionButtons =  '<%= image_tag("bar_chart_icon.png", :class => "actionIcons") %>'
-									  +	 '<%= image_tag("cancel_icon.png", :class => "actionIcons") %>'
-									  +  '<%= image_tag("lock_icon.png", :class => "actionIcons") %>';	
+				var userRowHtml = "";
+				var actionButtons =  '<%= image_tag("bar_chart_icon.png", :class => "actionIcons") %>'
+								  +	 '<%= image_tag("cancel_icon.png", :class => "actionIcons") %>'
+								  +  '<%= image_tag("lock_icon.png", :class => "actionIcons") %>';
 
-					userRowHtml += "<tr>"
-								+ 	"<td>" + user.firstName + "</td>"
-								+	"<td>" + user.lastName + "</td>"
-								+	"<td>" + user.location.name + "</td>"
-								+	"<td>" + actionButtons + "</td>"
-								+  "</tr>";
+				var createdAndModifiedString = "Created @ " + user.userCreated + " by " + user.userCreatedBy + "\n"
+												+ "Modified @ " + user.userModified + " by " + user.userModifiedBy;
 
-					return userRowHtml;
-				}
+				userRowHtml += "<tr>"
+							+ 	"<td data-toggle='tooltip' title='" + createdAndModifiedString + "' data-username='" + user.username + "'><a href='#' class='displayName'>" + user.firstName + "</a></td>"
+							+	"<td data-toggle='tooltip' title='" + createdAndModifiedString + "' data-username='" + user.username + "'><a href='#' class='displayName'>" + user.lastName + "</a></td>"
+							+	"<td>" + user.location.name + "</td>"
+							+	"<td>" + actionButtons + "</td>"
+							+  "</tr>";
 
-				$("#userListTable tr").on("hover", function(){
-					alert("here");
-				});
+				return userRowHtml;
+			}
 
+			$("body").on("click", "a.displayName", function(event){
+				alert($(this).parent().data("username"));
+			});
 
 		</script>
 
