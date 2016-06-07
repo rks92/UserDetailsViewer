@@ -29,7 +29,7 @@
 				userRowHtml += "<tr>"
 							+ 	"<td data-toggle='tooltip' title='" + createdAndModifiedString + "' data-username='" + user.username + "'><a href='#' class='displayName'>" + user.firstName + "</a></td>"
 							+	"<td data-toggle='tooltip' title='" + createdAndModifiedString + "' data-username='" + user.username + "'><a href='#' class='displayName'>" + user.lastName + "</a></td>"
-							+	"<td>" + user.location.name + "</td>"
+							+	"<td><a href=javascript:showLocation(" + user.location.id + ")>" + user.location.name + "</a></td>"
 							+	"<td>" + actionButtons + "</td>"
 							+  "</tr>";
 
@@ -39,6 +39,10 @@
 			$("body").on("click", "a.displayName", function(event){
 				alert($(this).parent().data("username"));
 			});
+
+			function showLocation(id){
+				console.log(id);
+			}
 
 		</script>
 
